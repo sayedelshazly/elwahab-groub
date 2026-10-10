@@ -1911,7 +1911,7 @@ h2 em {
 }
 
 .hero-image:after {
-    background: url("assets/hero-coach-clean.jpg") 64% 54%/cover no-repeat
+    background: url("assets/hero-coach-feature.jpg") 64% 54%/cover no-repeat
 }
 
 .hero-shade {
@@ -2115,7 +2115,7 @@ h2 em {
     }
 
     .hero-image:after {
-        background-position: 64% 30%;
+        background-position: 82% 30%;
         background-size: cover;
         mask-image: none
     }
@@ -2532,22 +2532,22 @@ h2 em {
 
 /* Companies section: give each factory mark room to lead. */
 #companies {
-    padding: 82px 0 92px
+    padding: 68px 0 76px
 }
 
 #companies .section-heading {
-    margin-bottom: 44px
+    margin-bottom: 36px
 }
 
 #companies .company-grid {
-    gap: 18px
+    gap: 14px
 }
 
 #companies .company,
 #companies .company:first-child,
 #companies .company:last-child {
     min-height: 0;
-    padding: 24px 22px 20px;
+    padding: 20px 20px 18px;
     align-items: center;
     text-align: center;
     background: #fafafa;
@@ -2559,7 +2559,7 @@ h2 em {
 
 #companies .company-topline {
     width: 60%;
-    min-height: 242px;
+    min-height: 220px;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
@@ -2569,8 +2569,8 @@ h2 em {
 
 #companies .factory-logo-frame {
     width: min(100%, 360px);
-    height: 208px;
-    flex: 0 0 208px;
+    height: 188px;
+    flex: 0 0 188px;
     background: transparent;
     border: 0;
     border-radius: 0;
@@ -2625,7 +2625,7 @@ h2 em {
 
 @media(max-width:780px) {
     #companies {
-        padding: 64px 0 74px
+        padding: 56px 0 64px
     }
 
     #companies .company,
@@ -2641,9 +2641,9 @@ h2 em {
     }
 
     #companies .factory-logo-frame {
-        width: min(100%, 320px);
-        height: 184px;
-        flex-basis: 184px
+        width: min(100%, 300px);
+        height: 168px;
+        flex-basis: 168px
     }
 
     #companies .company h3 {

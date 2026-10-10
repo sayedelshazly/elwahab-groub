@@ -40,6 +40,15 @@
     navLinks.forEach(item => item.classList.toggle('active', item === link));
   }));
 
+  const backToTop = document.querySelector('.back-to-top');
+  if (backToTop) {
+    const updateBackToTop = () => {
+      backToTop.classList.toggle('is-visible', window.scrollY > 400);
+    };
+    window.addEventListener('scroll', updateBackToTop, { passive: true });
+    updateBackToTop();
+  }
+
   const track = document.getElementById('gallery-track');
   const cards = track ? [...track.querySelectorAll('.gallery-card')] : [];
   const current = document.getElementById('current-slide');

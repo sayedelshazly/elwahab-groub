@@ -1,4 +1,27 @@
 (() => {
+  const preloader = document.getElementById('page-preloader');
+  if (preloader) {
+    const startedAt = performance.now();
+    let dismissed = false;
+
+    const dismissPreloader = () => {
+      if (dismissed) return;
+      dismissed = true;
+
+      window.setTimeout(() => {
+        preloader.classList.add('is-done');
+        window.setTimeout(() => {
+          document.documentElement.classList.remove('has-preloader');
+          preloader.remove();
+        }, 420);
+      }, Math.max(0, 11020 - (performance.now() - startedAt)));
+    };
+
+    window.addEventListener('load', dismissPreloader, { once: true });
+    window.setTimeout(dismissPreloader, 2200);
+    if (document.readyState === 'complete') dismissPreloader();
+  }
+
   const menuButton = document.querySelector('.menu-toggle');
   const nav = document.querySelector('.main-nav');
   const navLinks = [...document.querySelectorAll('.main-nav a')];

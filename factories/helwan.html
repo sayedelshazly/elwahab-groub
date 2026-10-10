@@ -3,6 +3,9 @@
 
 <head>
     <meta charset="utf-8">
+    <script>
+        document.documentElement.classList.add('has-preloader');
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#bb0f1e">
     <meta name="description"
@@ -17,13 +20,21 @@
 </head>
 
 <body class="helwan-page">
+    <div class="page-preloader" id="page-preloader" role="status" aria-label="Loading El-Wahab Group">
+        <img class="preloader-logo" src="../assets/el-wahab-logo.svg" alt="">
+        <p class="preloader-caption" aria-hidden="true">ENGINEERING MOBILITY SINCE 1960</p>
+        <div class="preloader-track" aria-hidden="true"><span></span></div>
+    </div>
     <header class="site-header" id="top">
-        <a class="brand" href="../index.html" aria-label="El-Wahab Group home"><img class="brand-logo" src="../assets/el-wahab-logo.svg" alt="El-Wahab Group"></a>
+        <a class="brand" href="../index.html" aria-label="El-Wahab Group home"><img class="brand-logo"
+                src="../assets/el-wahab-logo.svg" alt="El-Wahab Group"></a>
         <button class="menu-toggle" aria-label="Open navigation"
             aria-expanded="false"><span></span><span></span></button>
         <nav class="main-nav" aria-label="Main navigation">
-            <a href="../index.html">GROUP</a><a class="active" href="#top">HELWAN</a><a href="#products">PRODUCTS</a><a
-                href="#partners">PARTNERS</a><a href="#contact">CONTACT</a>
+            <a href="../index.html">GROUP</a><a class="active" href="#top">HELWAN</a>
+            <a href="#products">PRODUCTS</a>
+            <a href="#partners">PARTNERS</a>
+            <!-- <a href="#contact">CONTACT</a> -->
         </nav>
         <a class="header-contact" href="#contact">LET'S TALK <span>↗</span></a>
     </header>
@@ -33,7 +44,8 @@
             <div class="helwan-hero-image" role="img" aria-label="Specialist vehicle built for demanding work"></div>
             <div class="helwan-hero-shade"></div>
             <div class="wrap helwan-hero-content">
-                <div class="factory-hero-logo"><img src="../assets/factory-helwan-logo.png" alt="Helwan Body Builders"></div>
+                <div class="factory-hero-logo"><img src="../assets/factory-helwan-logo.png" alt="Helwan Body Builders">
+                </div>
                 <h1 id="helwan-title">BUILT AROUND<br>THE <em>MISSION.</em></h1>
                 <p class="helwan-hero-copy">VEHICLE ENGINEERING FOR SPECIALIST NEEDS.<br>DESIGNED WITH PURPOSE. BUILT
                     FOR THE ROAD.</p>
@@ -130,7 +142,9 @@
     </main>
 
     <footer class="site-footer">
-        <div class="wrap footer-top"><a class="brand" href="../index.html"><img class="brand-logo" src="../assets/el-wahab-logo.svg" alt="El-Wahab Group"></a><a class="back-top" href="#top">BACK TO TOP ↑</a></div>
+        <div class="wrap footer-top"><a class="brand" href="../index.html"><img class="brand-logo"
+                    src="../assets/el-wahab-logo.svg" alt="El-Wahab Group"></a><a class="back-top" href="#top">BACK TO
+                TOP ↑</a></div>
         <div class="wrap footer-bottom"><span>© <span id="year"></span> EL-WAHAB GROUP. ALL RIGHTS RESERVED.</span><a
                 href="../index.html">RETURN TO THE GROUP WEBSITE ↗</a></div>
     </footer>

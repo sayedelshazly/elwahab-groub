@@ -2369,7 +2369,7 @@ h2 em {
     }
 
     .hero-image:after {
-        background-position: 82% 30%;
+        background-position: 50% 30%;
         background-size: cover;
         mask-image: none
     }

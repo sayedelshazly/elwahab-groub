@@ -18,7 +18,7 @@
   }));
 
   const track = document.getElementById('gallery-track');
-  const cards = [...track.querySelectorAll('.gallery-card')];
+  const cards = track ? [...track.querySelectorAll('.gallery-card')] : [];
   const current = document.getElementById('current-slide');
   const progress = document.getElementById('gallery-progress');
   const prev = document.getElementById('gallery-prev');
@@ -31,6 +31,7 @@
     return first.getBoundingClientRect().width + (parseFloat(styles.columnGap) || 0);
   }
   function updateGallery() {
+    if (!track) return;
     const step = stepSize();
     const index = step ? Math.round(track.scrollLeft / step) : 0;
     const visible = Math.max(1, Math.floor(track.clientWidth / (step || 1)));
@@ -46,14 +47,16 @@
   function moveGallery(direction) {
     track.scrollBy({ left: stepSize() * direction, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   }
-  prev.addEventListener('click', () => moveGallery(-1));
-  next.addEventListener('click', () => moveGallery(1));
-  track.addEventListener('scroll', updateGallery, { passive: true });
-  window.addEventListener('resize', updateGallery);
-  track.addEventListener('keydown', event => {
-    if (event.key === 'ArrowRight') { event.preventDefault(); moveGallery(1); }
-    if (event.key === 'ArrowLeft') { event.preventDefault(); moveGallery(-1); }
-  });
+  if (track) {
+    prev.addEventListener('click', () => moveGallery(-1));
+    next.addEventListener('click', () => moveGallery(1));
+    track.addEventListener('scroll', updateGallery, { passive: true });
+    window.addEventListener('resize', updateGallery);
+    track.addEventListener('keydown', event => {
+      if (event.key === 'ArrowRight') { event.preventDefault(); moveGallery(1); }
+      if (event.key === 'ArrowLeft') { event.preventDefault(); moveGallery(-1); }
+    });
+  }
 
   document.getElementById('year').textContent = new Date().getFullYear();
   updateGallery();

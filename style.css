@@ -921,29 +921,81 @@ h2 em {
 
     .menu-toggle {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: center;
-        gap: 6px;
+        align-items: center;
+        gap: 9px;
+        min-width: 78px;
+        min-height: 44px;
+        padding: 8px 2px 8px 10px;
+        color: #fff;
         background: transparent;
         border: 0;
-        padding: 12px;
-        z-index: 3
+        border-bottom: 1px solid #ffffff55;
+        border-radius: 0;
+        cursor: pointer;
+        z-index: 3;
+        transition: color .2s ease, border-color .2s ease
     }
 
-    .menu-toggle span {
+    .menu-toggle-label {
+        font: 600 10px/1 "Barlow Condensed", sans-serif;
+        letter-spacing: .16em
+    }
+
+    .menu-toggle-mark {
+        display: flex;
+        width: 22px;
+        height: 20px;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 4px
+    }
+
+    .menu-toggle-mark i {
         display: block;
-        width: 25px;
-        height: 1px;
-        background: #fff;
-        transition: transform .2s
+        height: 2px;
+        border-radius: 2px;
+        background: #bb0f1e;
+        transition: width .22s ease, transform .22s ease, opacity .16s ease
     }
 
-    .menu-toggle[aria-expanded=true] span:first-child {
-        transform: translateY(3.5px) rotate(45deg)
+    .menu-toggle-mark i:first-child {
+        width: 13px
     }
 
-    .menu-toggle[aria-expanded=true] span:last-child {
-        transform: translateY(-3.5px) rotate(-45deg)
+    .menu-toggle-mark i:nth-child(2) {
+        width: 21px
+    }
+
+    .menu-toggle-mark i:last-child {
+        width: 16px
+    }
+
+    .menu-toggle[aria-expanded=true] .menu-toggle-mark i:first-child {
+        width: 20px;
+        transform: translateY(6px) rotate(45deg)
+    }
+
+    .menu-toggle[aria-expanded=true] .menu-toggle-mark i:nth-child(2) {
+        width: 0;
+        opacity: 0
+    }
+
+    .menu-toggle[aria-expanded=true] .menu-toggle-mark i:last-child {
+        width: 20px;
+        transform: translateY(-6px) rotate(-45deg)
+    }
+
+    .menu-toggle:hover {
+        color: #bb0f1e;
+        border-color: #bb0f1e
+    }
+
+    .menu-toggle:focus-visible {
+        outline: 2px solid #fff;
+        outline-offset: 3px
     }
 
     .main-nav {
@@ -2623,6 +2675,11 @@ h2 em {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain
+}
+
+#companies .company:first-child .factory-logo-frame img {
+    width: 75%;
+    height: 75%
 }
 
 #companies .company-category {

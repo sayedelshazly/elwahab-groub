@@ -830,6 +830,39 @@ h2 em {
     color: var(--yellow)
 }
 
+.whatsapp-float {
+    position: fixed;
+    z-index: 25;
+    right: max(20px, env(safe-area-inset-right));
+    bottom: calc(max(20px, env(safe-area-inset-bottom)) + 64px);
+    display: grid;
+    width: 54px;
+    height: 54px;
+    place-items: center;
+    color: #fff;
+    background: var(--yellow);
+    border: 1px solid #ffffff70;
+    border-radius: 50%;
+    box-shadow: 0 8px 22px #0005;
+    transition: background .2s ease, transform .2s ease, box-shadow .2s ease
+}
+
+.whatsapp-float svg {
+    width: 30px;
+    height: 30px
+}
+
+.whatsapp-float:hover {
+    background: var(--mustard);
+    box-shadow: 0 11px 26px #0006;
+    transform: translateY(-3px) scale(1.04)
+}
+
+.whatsapp-float:focus-visible {
+    outline: 3px solid var(--white);
+    outline-offset: 3px
+}
+
 .back-to-top {
     position: fixed;
     z-index: 25;
@@ -871,6 +904,22 @@ h2 em {
 .back-to-top:focus-visible {
     outline: 3px solid var(--white);
     outline-offset: 3px
+}
+
+@media(max-width:780px) {
+    .whatsapp-float {
+        right: calc(env(safe-area-inset-right, 0px) + 16px);
+        bottom: calc(env(safe-area-inset-bottom, 0px) + 76px);
+        width: 52px;
+        height: 52px
+    }
+
+    .back-to-top {
+        right: calc(env(safe-area-inset-right, 0px) + 16px);
+        bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+        width: 48px;
+        height: 48px
+    }
 }
 
 .footer-bottom {
@@ -1539,12 +1588,63 @@ h2 em {
     font-size: clamp(56px, 6.5vw, 88px)
 }
 
-.helwan-partners-inner>div:last-child p {
+.helwan-partners-inner>div:nth-child(2) p {
     font-size: 14px;
     line-height: 1.9;
     color: #666;
     margin: 0 0 24px;
     max-width: 500px
+}
+
+.helwan-partners-inner .partner-logo-panel {
+    grid-column: 1 / -1;
+    min-width: 0;
+    margin-top: 16px;
+    padding: 18px;
+    background: #f2f2f2;
+    border: 1px solid #e2e2e2;
+    border-radius: 14px
+}
+
+.partner-logo-panel::before {
+    content: "";
+    display: block;
+    width: 44px;
+    height: 3px;
+    margin: 0 0 14px;
+    background: var(--yellow)
+}
+
+.partner-logo-scroll {
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    padding: 10px 12px;
+    background: #fff;
+    border-radius: 9px;
+    scrollbar-color: var(--yellow) #e9e9e9;
+    scrollbar-width: thin
+}
+
+.partner-logo-scroll img {
+    display: block;
+    width: min(100%, 988px);
+    height: auto;
+    margin-inline: auto;
+    border-radius: 5px
+}
+
+.partner-logo-scroll:focus-visible {
+    outline: 2px solid var(--yellow);
+    outline-offset: 3px
+}
+
+.partner-logo-hint {
+    display: none;
+    margin: 10px 0 0;
+    color: #666;
+    font: 400 10px/1.4 "Barlow Condensed", sans-serif;
+    letter-spacing: .14em;
+    text-align: center
 }
 
 .helwan-contact {
@@ -1707,6 +1807,25 @@ h2 em {
 }
 
 @media(max-width:480px) {
+    .partner-logo-panel {
+        padding: 12px
+    }
+
+    .partner-logo-scroll {
+        -webkit-overflow-scrolling: touch;
+        padding: 8px
+    }
+
+    .partner-logo-scroll img {
+        width: 620px;
+        max-width: none;
+        margin-inline: 0
+    }
+
+    .partner-logo-hint {
+        display: block
+    }
+
     .helwan-hero {
         height: 690px;
         min-height: 640px

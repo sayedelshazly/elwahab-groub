@@ -1520,6 +1520,13 @@ h2 em {
     transition: transform .55s, filter .4s
 }
 
+.helwan-product-image-link {
+    display: block;
+    position: relative;
+    z-index: 0;
+    height: 100%
+}
+
 .helwan-product:hover img {
     transform: scale(1.035);
     filter: saturate(1)
@@ -1529,7 +1536,8 @@ h2 em {
     content: "";
     position: absolute;
     inset: 25% 0 0;
-    background: linear-gradient(0deg, #080808ed, transparent)
+    background: linear-gradient(0deg, #080808ed, transparent);
+    pointer-events: none
 }
 
 .helwan-product-caption {
@@ -1564,6 +1572,32 @@ h2 em {
     line-height: 1.55;
     margin: 0;
     max-width: 340px
+}
+
+.helwan-product-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 38px;
+    margin-top: 9px;
+    padding: 0 11px;
+    border: 1px solid #ffffff65;
+    color: #fff;
+    font: 500 12px "Barlow Condensed", sans-serif;
+    letter-spacing: .08em;
+    transition: color .2s ease, background .2s ease, border-color .2s ease
+}
+
+.helwan-product-action:hover,
+.helwan-product-action:focus-visible {
+    border-color: var(--yellow);
+    background: var(--yellow);
+    color: #fff
+}
+
+.helwan-product-action:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px
 }
 
 .helwan-gallery-note {
@@ -2301,6 +2335,104 @@ h2 em {
     padding-top: 25px
 }
 
+.vehicle-specifications {
+    display: grid;
+    grid-template-columns: minmax(220px, .72fr) minmax(0, 1.5fr) auto;
+    align-items: center;
+    gap: 28px;
+    margin-top: 62px;
+    padding: 30px 34px;
+    border-top: 1px solid #ffffff35;
+    border-bottom: 1px solid #ffffff35;
+    background: #171717
+}
+
+.vehicle-specs-heading > p {
+    margin: 0 0 5px;
+    color: #f26a73;
+    font: 500 11px "Barlow Condensed", sans-serif;
+    letter-spacing: .15em
+}
+
+.vehicle-specs-heading h2 {
+    margin: 0;
+    font: 500 clamp(28px, 3vw, 38px)/1 "Barlow Condensed", sans-serif;
+    letter-spacing: -.02em
+}
+
+.vehicle-specs-heading > span {
+    display: block;
+    max-width: 31ch;
+    margin-top: 9px;
+    color: #bbb;
+    font-size: 12px;
+    line-height: 1.5
+}
+
+.vehicle-spec-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 26px;
+    margin: 0
+}
+
+.vehicle-spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    min-height: 61px;
+    padding: 9px 0;
+    border-bottom: 1px solid #ffffff25
+}
+
+.vehicle-spec-row dt {
+    color: #c8c8c8;
+    font: 500 12px "Barlow Condensed", sans-serif;
+    letter-spacing: .1em
+}
+
+.vehicle-spec-row dd {
+    display: grid;
+    margin: 0;
+    text-align: right
+}
+
+.vehicle-spec-row dd strong {
+    font-size: 13px;
+    font-weight: 600
+}
+
+.vehicle-spec-row dd span {
+    color: #999;
+    font-size: 10px
+}
+
+.vehicle-spec-request {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+    min-height: 48px;
+    padding: 0 17px;
+    background: var(--yellow);
+    color: #fff;
+    font: 500 14px "Barlow Condensed", sans-serif;
+    letter-spacing: .08em;
+    white-space: nowrap;
+    transition: background .2s ease, transform .2s ease
+}
+
+.vehicle-spec-request:hover {
+    background: #d21b2b;
+    transform: translateY(-2px)
+}
+
+.vehicle-spec-request:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px
+}
+
 @media(max-width:850px) {
     .vehicle-layout { grid-template-columns: minmax(0, 1fr); gap: 34px }
     .vehicle-copy { display: grid; grid-template-columns: minmax(0, 1fr) minmax(200px, .75fr); column-gap: 28px }
@@ -2309,6 +2441,9 @@ h2 em {
     .vehicle-copy > .vehicle-description { grid-column: 1 / -1 }
     .vehicle-facts { margin-top: 18px }
     .vehicle-maker { margin-top: 18px; align-self: start }
+    .vehicle-specifications { grid-template-columns: minmax(0, 1fr) auto; gap: 18px 24px; padding: 25px }
+    .vehicle-specs-heading { grid-column: 1 / -1 }
+    .vehicle-specs-heading > span { max-width: 54ch }
 }
 
 @media(max-width:560px) {
@@ -2321,6 +2456,11 @@ h2 em {
     .vehicle-thumb span { padding: 7px 5px; font-size: 11px }
     .vehicle-copy { display: block }
     .vehicle-copy h1 { font-size: 51px }
+    .vehicle-specifications { grid-template-columns: minmax(0, 1fr); margin-top: 43px; padding: 23px 17px; gap: 20px }
+    .vehicle-specs-heading { grid-column: auto }
+    .vehicle-spec-grid { grid-template-columns: minmax(0, 1fr) }
+    .vehicle-spec-row { min-height: 58px }
+    .vehicle-spec-request { width: 100% }
     .vehicle-shortcuts { grid-template-columns: 1fr; gap: 12px; margin-top: 50px }
     .vehicle-shortcut { flex-basis: 76px; height: 58px }
 }

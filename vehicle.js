@@ -13,6 +13,41 @@
     { id: '11', title: 'Purpose-built specialist vehicle', category: 'SPECIALIST VEHICLES', description: 'A distinctive two-tone specialist vehicle with a dedicated body. Its contrasting finish and fitted form make its purpose-built character easy to read.', facts: [['VEHICLE TYPE', 'Purpose-built specialist vehicle'], ['VISIBLE DESIGN', 'Two-tone body · dedicated fit-out']], company: 'Helwan Body Builders', companyShort: 'HELWAN', companyHref: 'factories/helwan.html', companyDescription: 'The group’s body-building specialist, adapting vehicle bodies and layouts to meet specific working requirements.' },
     { id: '12', title: 'Box-body commercial truck', category: 'COMMERCIAL TRANSPORT', description: 'A commercial truck with an enclosed box body that provides a defined cargo space for business transport. The straightforward form is made for practical daily use.', facts: [['VEHICLE TYPE', 'Box-body commercial truck'], ['VISIBLE DESIGN', 'Enclosed cargo space · commercial chassis']], company: 'Commercial Motors', companyShort: 'CMC', companyHref: 'factories/cmc.html', companyDescription: 'The group’s commercial vehicle company, with experience in truck beds and business-focused vehicle bodies.' }
   ];
+  const catalogs = {
+    helwan: {
+      shortName: 'HELWAN', company: 'Helwan Body Builders', companyHref: 'factories/helwan.html#products',
+      companyDescription: 'Helwan Body Builders designs vehicle bodies and specialist applications around the work each vehicle needs to do.',
+      backHref: 'factories/helwan.html#products',
+      vehicles: [
+        { id: '05', title: 'Armored vehicles', category: 'SPECIALIST APPLICATIONS', description: 'A specialist vehicle sample from Helwan Body Builders, engineered for demanding operating requirements.' },
+        { id: '07', title: 'Service vehicles', category: 'WORK-READY SOLUTIONS', description: 'Versatile vehicles configured for work on the move.' },
+        { id: '10', title: 'Moving stores', category: 'BUILT AROUND YOUR NEEDS', description: 'Mobile spaces designed to bring service closer.' },
+        { id: '11', title: 'Caravans', category: 'MADE FOR THE JOURNEY', description: 'Custom vehicle solutions made for life on the road.' }
+      ]
+    },
+    interbus: {
+      shortName: 'INTERBUS', company: 'International Company for Buses', companyHref: 'factories/interbus.html#products',
+      companyDescription: 'International Company for Buses manufactures micro, mini and midi buses, with seating capacities and layouts tailored to the vehicle brief.',
+      backHref: 'factories/interbus.html#products',
+      vehicles: [
+        { id: '02', title: 'Coaches', category: 'PASSENGER MOBILITY', description: 'Passenger vehicles for journeys near and far.' },
+        { id: '01', title: 'Minibuses', category: 'EVERYDAY TRANSPORT', description: 'Compact passenger transport solutions.' },
+        { id: '04', title: 'Bus design', category: 'DESIGNED FOR THE ROAD', description: 'Form and function come together in every journey.' },
+        { id: '09', title: 'Passenger buses', category: 'MADE TO MOVE PEOPLE', description: 'Vehicles created to keep people moving.' }
+      ]
+    },
+    cmc: {
+      shortName: 'CMC', company: 'Commercial Motors Company', companyHref: 'factories/cmc.html#expertise',
+      companyDescription: 'Commercial Motors Company focuses on commercial vehicle manufacturing and truck-bed production for business use.',
+      backHref: 'factories/cmc.html#expertise',
+      vehicles: [
+        { id: '08', title: 'GM truck beds', category: 'CMC MANUFACTURING', description: 'Production expertise developed over decades in Egypt.' },
+        { id: '12', title: 'Commercial bodies', category: 'BUILT FOR BUSINESS', description: 'Purpose-built bodies for commercial vehicles.' },
+        { id: '03', title: 'Vehicle manufacturing', category: 'QUALITY IN PRODUCTION', description: 'Attention to quality through every production stage.' },
+        { id: '10', title: 'Commercial solutions', category: 'MADE FOR THE APPLICATION', description: 'Manufacturing shaped around real vehicle requirements.' }
+      ]
+    }
+  };
   const frames = [
     { name: 'Full photograph', className: 'frame-whole', position: 'center' },
     { name: 'Front detail crop', className: 'frame-front', position: 'left center' },
@@ -21,21 +56,75 @@
   ];
   const params = new URLSearchParams(location.search);
   const requestedId = params.get('id');
+  const selectedCatalog = catalogs[params.get('factory')] || null;
   const vehicle = vehicles.find(item => item.id === requestedId);
   const validVehicle = vehicle || vehicles[0];
-  const image = `assets/vehicle-${validVehicle.id}.jpg`;
+  const catalogVehicle = selectedCatalog?.vehicles.find(item => item.id === validVehicle.id);
+  const detailVehicle = {
+    ...validVehicle,
+    ...(catalogVehicle || {}),
+    ...(selectedCatalog ? {
+      company: selectedCatalog.company,
+      companyHref: selectedCatalog.companyHref,
+      companyDescription: selectedCatalog.companyDescription
+    } : {})
+  };
+  const image = `assets/vehicle-${detailVehicle.id}.jpg`;
   const mainImage = document.getElementById('vehicle-main-image');
   const thumbHolder = document.getElementById('vehicle-thumbnails');
   const imageIndex = document.getElementById('vehicle-image-index');
 
-  document.title = `${validVehicle.title} | El-Wahab Group`;
-  document.getElementById('vehicle-category').textContent = validVehicle.category;
-  document.getElementById('vehicle-title').textContent = validVehicle.title;
-  document.getElementById('vehicle-description').textContent = validVehicle.description;
-  document.getElementById('vehicle-maker-name').textContent = validVehicle.company;
-  document.getElementById('vehicle-maker-description').textContent = validVehicle.companyDescription;
-  document.getElementById('vehicle-maker-link').href = validVehicle.companyHref;
+  document.title = `${detailVehicle.title} | El-Wahab Group`;
+  document.getElementById('vehicle-category').textContent = detailVehicle.category;
+  document.getElementById('vehicle-title').textContent = detailVehicle.title;
+  document.getElementById('vehicle-description').textContent = detailVehicle.description;
+  document.getElementById('vehicle-maker-name').textContent = detailVehicle.company;
+  document.getElementById('vehicle-maker-description').textContent = detailVehicle.companyDescription;
+  document.getElementById('vehicle-maker-link').href = detailVehicle.companyHref;
+  const headerLink = document.querySelector('.vehicle-detail-header .header-contact');
+  const galleryBack = document.querySelector('.vehicle-back');
+  if (selectedCatalog) {
+    headerLink.href = selectedCatalog.backHref;
+    headerLink.textContent = `BACK TO ${selectedCatalog.shortName}`;
+    const headerArrow = document.createElement('span');
+    headerArrow.setAttribute('aria-hidden', 'true');
+    headerArrow.textContent = ' ↗';
+    headerLink.append(headerArrow);
+    galleryBack.href = selectedCatalog.backHref;
+    galleryBack.textContent = '';
+    const backArrow = document.createElement('span');
+    backArrow.setAttribute('aria-hidden', 'true');
+    backArrow.textContent = '←';
+    galleryBack.append(backArrow, document.createTextNode(` BACK TO ${selectedCatalog.shortName}`));
+  }
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  const specRequest = document.getElementById('vehicle-spec-request');
+  const specMessage = `Hello, please share the verified engine capacity, horsepower, model year, and top speed for the ${detailVehicle.title}.`;
+  specRequest.href = `https://wa.me/201006700120?text=${encodeURIComponent(specMessage)}`;
+  specRequest.target = '_blank';
+  specRequest.rel = 'noopener';
+  const specifications = [
+    ['ENGINE CAPACITY', 'Engine displacement in cc'],
+    ['HORSEPOWER', 'Engine output in hp'],
+    ['MODEL YEAR', 'Year of manufacture'],
+    ['TOP SPEED', 'Maximum speed']
+  ];
+  const specGrid = document.getElementById('vehicle-spec-grid');
+  specifications.forEach(([label, detail]) => {
+    const row = document.createElement('div');
+    row.className = 'vehicle-spec-row';
+    const term = document.createElement('dt');
+    term.textContent = label;
+    const value = document.createElement('dd');
+    const unavailable = document.createElement('strong');
+    unavailable.textContent = 'Available on request';
+    const note = document.createElement('span');
+    note.textContent = detail;
+    value.append(unavailable, note);
+    row.append(term, value);
+    specGrid.append(row);
+  });
 
   validVehicle.facts.forEach(([label, value]) => {
     const item = document.createElement('div');
@@ -51,7 +140,7 @@
   function selectFrame(index) {
     const frame = frames[index];
     mainImage.src = image;
-    mainImage.alt = `${validVehicle.title} — ${frame.name.toLowerCase()}`;
+    mainImage.alt = `${detailVehicle.title} — ${frame.name.toLowerCase()}`;
     mainImage.className = frame.className;
     imageIndex.textContent = `${String(index + 1).padStart(2, '0')} / 04`;
     [...thumbHolder.querySelectorAll('button')].forEach((button, i) => {
@@ -78,10 +167,14 @@
   selectFrame(0);
 
   const shortcuts = document.getElementById('vehicle-shortcuts');
-  vehicles.filter(item => item.id !== validVehicle.id).forEach(item => {
+  const shortcutVehicles = selectedCatalog ? selectedCatalog.vehicles : vehicles;
+  if (selectedCatalog) {
+    document.querySelector('.vehicle-shortcuts strong').textContent = `MORE FROM ${selectedCatalog.shortName}`;
+  }
+  shortcutVehicles.filter(item => item.id !== detailVehicle.id).forEach(item => {
     const link = document.createElement('a');
     link.className = 'vehicle-shortcut';
-    link.href = `vehicle.html?id=${item.id}`;
+    link.href = `vehicle.html?id=${item.id}${selectedCatalog ? `&factory=${params.get('factory')}` : ''}`;
     link.setAttribute('aria-label', `Explore ${item.title}`);
     const thumb = document.createElement('img');
     thumb.src = `assets/vehicle-${item.id}.jpg`;
